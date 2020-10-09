@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  check_in: 2020-10-09 17:27:36
+  check_out: 2020-10-09 17:27:36
+  user: one
+  location: one
+
+two:
+  check_in: 2020-10-09 17:27:36
+  check_out: 2020-10-09 17:27:36
+  user: two
+  location: two

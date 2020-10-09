@@ -3,3 +3,4 @@
 dump.rdb
 .byebug_history
 .env*
+.vscode/

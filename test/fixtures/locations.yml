@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  capacity: 1
+  latitude: 9.99
+  longitide: 9.99
+  user: one
+
+two:
+  name: MyString
+  capacity: 1
+  latitude: 9.99
+  longitide: 9.99
+  user: two
