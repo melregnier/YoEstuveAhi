@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  skip_before_action :authorized, only: [:new, :create]
+  layout 'sessions', only: :new
+
   def new
     @user = User.new
   end

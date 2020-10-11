@@ -1,0 +1,16 @@
+<h1>
+  Hola <%= current_user.name %>!
+</h1>
+<h4>
+  <%= current_user.welcome_message %> 
+</h4>
+<% if current_user.can_check_in? %>
+  <%= button_to 'Escanear QR', '/qr', method: 'get' %>
+<% end %>
+
+<% if current_user.can_get_infected? %>
+<%= button_to 'Registrar test positivo', '/test/positive', method: 'get' %>
+<% end %>
+
+<%= button_to 'Registrar nueva locación', new_location_path, method: 'get' %>
+<%= button_to 'Registrar test negativo', '/test/negative', method: 'get' %>

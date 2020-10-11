@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>YoEstuveAqui</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>Yo Estuve Aqui</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body>
-    <%= yield %>
-  </body>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<header class='clearfix'>
+  <div class="left-nav">
+    <ul>
+      <li><%= link_to "Home", '/home' %></li>
+    </ul>
+  </div>
+  <div class="right-nav">
+    <ul>
+      <li><%= link_to "Mis locaciones", locations_path, method: 'get' %></li>
+      <!-- <li><%= link_to "Lugares visitados", '/lugares_visitados', method: 'get' %></li> -->
+      <li><%= link_to "Salir", '/logout', method: 'delete' %></li>
+    </ul>
+  </div>
+</header>
+
+<body>
+  <%= yield %>
+</body>
+
 </html>

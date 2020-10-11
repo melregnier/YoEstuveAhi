@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 2020_10_09_204627) do
     t.string "document_type", null: false
     t.integer "document_number", null: false
     t.string "email", null: false
-    t.string "password", null: false
-    t.string "status", default: "healthy"
+    t.string "password_digest", null: false
+    t.string "state", default: "healthy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -8,7 +8,7 @@
     </tr>
     <% @locations.each do |location| %>
     <tr>
-        <td><%= location.name %></td>
+        <td><%= link_to location.name, location_path(location.id), method: 'get' %></td>
         <td><%= location.latitude.to_s + ' ' +location.latitude.to_s %></td>
         <td>ESTO ES UN LOGO</td>
         <td>ESTO ES UN QR</td>
