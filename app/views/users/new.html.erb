@@ -1,0 +1,16 @@
+<h1>Registrar</h1>
+<%= form_for @user do |f|%>
+  <%= f.label :Nombre%><br>
+  <%= f.text_field :name, required: true%><br>
+  <%= f.label :Email%><br>
+  <%= f.email_field :email, required: true%><br>
+  <%= f.label 'Tipo de documento'%><br>
+  <%= f.select :document_type, ['DNI', 'L.C', 'Otro']%> <br>
+  <%= f.label 'Número de documento'%><br>
+  <%= f.text_field :document_number, required: true%><br>
+  <%= f.label :Contraseña%><br>
+  <%= f.password_field :password, required: true%><br>
+  <%= f.label 'Confirmar contraseña'%><br>
+  <%= f.password_field :password_confirmation, required: true%><br>
+  <%= f.submit 'Registrarme'%>
+<%end%>

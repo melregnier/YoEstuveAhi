@@ -16,17 +16,17 @@ ActiveRecord::Schema.define(version: 2020_10_09_204627) do
   enable_extension "plpgsql"
 
   create_table "covid_tests", force: :cascade do |t|
-    t.date "date"
-    t.boolean "result"
+    t.date "date", null: false
+    t.boolean "result", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_covid_tests_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string "name"
-    t.integer "capacity"
-    t.decimal "latitude", precision: 10, scale: 6
-    t.decimal "longitide", precision: 10, scale: 6
+    t.string "name", null: false
+    t.integer "capacity", null: false
+    t.decimal "latitude", precision: 10, scale: 6, null: false
+    t.decimal "longitude", precision: 10, scale: 6, null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 2020_10_09_204627) do
   end
 
   create_table "user_location_histories", force: :cascade do |t|
-    t.datetime "check_in"
-    t.datetime "check_out"
+    t.datetime "check_in", null: false
+    t.datetime "check_out", null: false
     t.bigint "user_id"
     t.bigint "location_id"
     t.index ["location_id"], name: "index_user_location_histories_on_location_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_204627) do
   end
 
   create_table "user_locations", force: :cascade do |t|
-    t.datetime "check_in"
+    t.datetime "check_in", null: false
     t.bigint "user_id"
     t.bigint "location_id"
     t.index ["location_id"], name: "index_user_locations_on_location_id"
@@ -51,11 +51,11 @@ ActiveRecord::Schema.define(version: 2020_10_09_204627) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "document_type"
-    t.integer "document_number"
-    t.string "email"
-    t.string "password"
+    t.string "name", null: false
+    t.string "document_type", null: false
+    t.integer "document_number", null: false
+    t.string "email", null: false
+    t.string "password", null: false
     t.string "status", default: "healthy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

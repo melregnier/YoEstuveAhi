@@ -1,0 +1,19 @@
+<h1>Listing locations</h1>
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Mapa</th>
+        <th>Logo</th>
+        <th>QR</th>
+    </tr>
+    <% @locations.each do |location| %>
+    <tr>
+        <td><%= location.name %></td>
+        <td><%= location.latitude.to_s + ' ' +location.latitude.to_s %></td>
+        <td>ESTO ES UN LOGO</td>
+        <td>ESTO ES UN QR</td>
+    </tr>
+    <% end %>
+</table>
+
+<%= button_to "Crear locación", new_location_path, method: :get %>
