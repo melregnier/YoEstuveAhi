@@ -1,19 +1,17 @@
-class InfectedState < State
-  include Singleton
-
-  def welcome_message
-    'Usted está contagiado de COVID-19, por favor mantengase en su casa y cuídese'
+class State
+  def initialize(user)
+    @user = user
   end
 
-  def can_check_in?
-    false
-  end
-
-  def check_in
+  def state_description
     raise NotImplementedError
   end
 
-  def can_check_out?
+  def can_check_in?
+    raise NotImplementedError
+  end
+
+  def check_in
     raise NotImplementedError
   end
 
@@ -22,7 +20,7 @@ class InfectedState < State
   end
 
   def can_get_infected?
-    false
+    raise NotImplementedError
   end
 
   def got_infected

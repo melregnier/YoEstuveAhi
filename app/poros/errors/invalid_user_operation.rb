@@ -1,0 +1,2 @@
+class InvalidUserOperation < StandardError
+end

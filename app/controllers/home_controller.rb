@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
   def index
-    return render 'inside' if current_user.user_location
-
-    render 'outside'
+    @user_decorator = UserDecorator.new(current_user)
+    @location_decorator = LocationDecorator.new(@user_decorator.current_location) if @user_decorator.at_location?
   end
 end

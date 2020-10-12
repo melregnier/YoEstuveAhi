@@ -1,4 +1,4 @@
-<h1>Listing locations</h1>
+<h1>Mis locaciones</h1>
 <table>
     <tr>
         <th>Nombre</th>
@@ -9,7 +9,7 @@
     <% @locations.each do |location| %>
     <tr>
         <td><%= link_to location.name, location_path(location.id), method: 'get' %></td>
-        <td><%= location.latitude.to_s + ' ' +location.latitude.to_s %></td>
+        <td><%= location.latitude.to_s + ' ' +location.longitude.to_s %></td>
         <td>ESTO ES UN LOGO</td>
         <td>ESTO ES UN QR</td>
     </tr>

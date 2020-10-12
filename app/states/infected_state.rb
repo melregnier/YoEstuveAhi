@@ -1,19 +1,13 @@
-class HealthyState < State
-  include Singleton
-
-  def welcome_message
-    'Usted se encuentra sano, por ahora :D'
+class InfectedState < State
+  def state_description
+    'contagiado'
   end
 
   def can_check_in?
-    true
+    false
   end
 
   def check_in
-    raise NotImplementedError
-  end
-
-  def can_check_out?
     raise NotImplementedError
   end
 
@@ -22,11 +16,11 @@ class HealthyState < State
   end
 
   def can_get_infected?
-    true
+    false
   end
 
   def got_infected
-    raise NotImplementedError
+    raise InvalidUserOperation
   end
 
   def discharged

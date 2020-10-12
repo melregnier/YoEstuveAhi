@@ -1,8 +1,6 @@
 class AtRiskState < State
-  include Singleton
-
-  def welcome_message
-    'Usted se encuentra en riesgo de tener COVID-19'
+  def state_description
+    'en riesgo'
   end
 
   def can_check_in?
@@ -10,10 +8,6 @@ class AtRiskState < State
   end
 
   def check_in
-    raise NotImplementedError
-  end
-
-  def can_check_out?
     raise NotImplementedError
   end
 
@@ -26,7 +20,7 @@ class AtRiskState < State
   end
 
   def got_infected
-    raise NotImplementedError
+    @user.state = User.state[:infected]
   end
 
   def discharged

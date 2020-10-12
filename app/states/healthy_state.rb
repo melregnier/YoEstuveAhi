@@ -1,32 +1,26 @@
-class State
-  include Singleton
-
-  def welcome_message
-    raise NotImplementedError
+class HealthyState < State
+  def state_description
+    'sano'
   end
 
   def can_check_in?
-    raise NotImplementedError
+    true
   end
 
   def check_in
     raise NotImplementedError
   end
-
-  def can_check_out?
-    raise NotImplementedError
-  end
-
+  
   def check_out
     raise NotImplementedError
   end
 
   def can_get_infected?
-    raise NotImplementedError
+    true
   end
 
   def got_infected
-    raise NotImplementedError
+    @user.state = User.state[:infected]
   end
 
   def discharged

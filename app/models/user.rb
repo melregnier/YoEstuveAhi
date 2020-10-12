@@ -13,9 +13,9 @@ class User < ApplicationRecord
   validates_confirmation_of :password
 
   STATE_MAP = {
-    'healthy' => HealthyState.instance,
-    'at_risk' => AtRiskState.instance,
-    'infected' => InfectedState.instance
+    'healthy' => HealthyState,
+    'at_risk' => AtRiskState,
+    'infected' => InfectedState
   }
 
   enum state: {
@@ -23,6 +23,18 @@ class User < ApplicationRecord
     at_risk: 'at_risk',
     infected: 'infected'
   }
+
+  def can_check_in?
+    user_location.nil? && state_object.can_check_in?
+  end
+  
+  def can_check_out?
+    user_location.present?
+  end
+
+  def respond_to?(method_name)
+    state_object.respond_to?(method_name) || super
+  end
 
   def method_missing(method_name, *args)
     return state_object.send(method_name, *args) if state_object.respond_to?(method_name)
@@ -33,6 +45,6 @@ class User < ApplicationRecord
   private
 
   def state_object
-    STATE_MAP[self.state]
+    STATE_MAP[self.state].new(self)
   end
 end

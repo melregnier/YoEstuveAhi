@@ -1,0 +1,13 @@
+<h1>Mis tests</h1>
+<table>
+    <tr>
+        <th>Fecha</th>
+        <th>Resultado</th>
+    </tr>
+    <% @decorated_tests.each do |test| %>
+    <tr>
+        <td><%= test.formatted_date %></td>
+        <td><%= test.result_description %></td>
+    </tr>
+    <% end %>
+</table>
