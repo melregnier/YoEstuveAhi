@@ -1,2 +1,4 @@
-class InvalidUserOperation < StandardError
+module Errors
+  class InvalidUserOperation < StandardError
+  end
 end
