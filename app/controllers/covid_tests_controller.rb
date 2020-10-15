@@ -10,7 +10,7 @@ class CovidTestsController < ApplicationController
   end
 
   def new_negative
-
+    @negative_test = CovidTest.new
   end
 
   def create_positive
@@ -20,12 +20,14 @@ class CovidTestsController < ApplicationController
   end
 
   def create_negative
-    
+    success = DischargeUser.new(current_user, date).perform
+    flash[:notice] = 'No se pudo registrar el test' unless success
+    redirect_to('/home')
   end
 
   private
 
   def date
-    params.require(:covid_test).permit(:date)
+    params.require(:covid_test)[:date].to_date
   end
 end

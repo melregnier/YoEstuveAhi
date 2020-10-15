@@ -66,3 +66,6 @@ gem 'dotenv-rails'
 gem 'bcrypt'
 
 gem 'require_all'
+
+gem 'bootstrap'
+gem 'jquery-rails'

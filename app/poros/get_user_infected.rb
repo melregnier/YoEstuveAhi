@@ -10,12 +10,12 @@ class GetUserInfected
     ActiveRecord::Base.transaction do 
       @user.covid_tests.create!(date: @date, result: true)
       @user.got_infected
-    rescue
+    rescue => error
       return false
     end
 
     NotifyLocationsOfInfection.new(@user).perform
-    InformInContactUsersOfPossibleRisk.new(@user).perform
+    InformInContactUsersOfPossibleRisk.new(@user).perform unless @user.user_location.present?
     true   
   end
 end

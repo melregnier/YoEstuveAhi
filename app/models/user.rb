@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :covid_tests
   has_many :user_location_histories
   has_many :locations
+  has_many :user_logs
+  after_save :create_status_change_log
 
   has_secure_password
 
@@ -46,5 +48,9 @@ class User < ApplicationRecord
 
   def state_object
     STATE_MAP[self.state].new(self)
+  end
+
+  def create_status_change_log
+    user_logs.create(created_at: Time.now, to_state: state) if saved_change_to_state?
   end
 end

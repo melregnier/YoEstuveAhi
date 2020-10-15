@@ -1,0 +1,4 @@
+<%= form_for(@negative_test, url: {controller: 'covid_tests', action: 'create_negative'}) do |f| %>
+    <%= f.date_field :date, placeholder: 'Fecha', required: true, min: Date.new(2020, 01, 01), max: Date.today %> <br>
+    <%= f.submit 'Registrar test negativo'%>
+<% end %>

@@ -18,7 +18,7 @@
 <% end %>
 
 <% if @user_decorator.can_get_infected? %>
-<%= button_to 'Registrar test positivo', '/tests/positive', method: 'get' %>
+<%= button_to 'Registrar test positivo', '/tests/positive', method: 'get', class: 'btn btn-primary' %>
 <% end %>
 
 <%= button_to 'Registrar nueva locación', new_location_path, method: 'get' %>

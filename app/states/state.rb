@@ -19,6 +19,10 @@ class State
     raise NotImplementedError
   end
 
+  def put_at_risk
+    raise NotImplementedError
+  end
+
   def can_get_infected?
     raise NotImplementedError
   end
@@ -27,7 +31,7 @@ class State
     raise NotImplementedError
   end
 
-  def discharged
+  def discharge
     raise NotImplementedError
   end
 end

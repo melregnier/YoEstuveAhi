@@ -15,15 +15,21 @@ class HealthyState < State
     raise NotImplementedError
   end
 
+  def put_at_risk
+    @user.state = :at_risk
+    @user.save
+  end
+
   def can_get_infected?
     true
   end
 
   def got_infected
-    @user.state = User.state[:infected]
+    @user.state = :infected
+    @user.save
   end
 
-  def discharged
-    raise NotImplementedError
+  def discharge
+    # does not change its state
   end
 end
