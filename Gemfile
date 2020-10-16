@@ -69,3 +69,5 @@ gem 'require_all'
 
 gem 'bootstrap'
 gem 'jquery-rails'
+
+gem 'webpacker'

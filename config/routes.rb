@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   end
 
   get 'home', to: 'home#index'
+
+  get 'qr', to: 'user_locations#new'
 end
