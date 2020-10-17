@@ -2,5 +2,5 @@
 <h2>Actualmente hay <%= @location.user_locations.count %> personas en tu local. </h2>
     Nombre: <%= @location.name %> <br>
     Geoposición: <%= @location.latitude.to_s + ' ' + @location.latitude.to_s %> <br>
-    Logo: ESTO ES UN LOGO <br>
+    Logo: <image src="<%= url_for(@location.location_image) %>"/> <br>
     QR: ESTO ES UN QR <br>

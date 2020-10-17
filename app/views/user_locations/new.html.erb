@@ -1,6 +1,10 @@
-<div id="qr-reader" style="width:400px"></div>
-
-<!-- include the library -->
-<script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
-
-<script src="assets/qr_scanner.js"></script>
+<div class="container p-3 my-3 border">
+    <h1>Carga el código QR de la locación</h1>
+</div>
+<div class="container p-3 my-3 border">
+    <%= form_for(@user_location)  do |f| %>
+    <%= f.file_field :qr_image, required: true, class:"form-control" %>
+    <br>
+    <%= f.submit 'Ingresar', class: "btn btn-outline-success"%>
+    <% end %>
+</div>

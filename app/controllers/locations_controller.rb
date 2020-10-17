@@ -10,7 +10,6 @@ class LocationsController < ApplicationController
   def create
     location = Location.new(create_params.merge(user_id: current_user.id))
     return redirect_to(new_location_path) unless location.save
-
     redirect_to(location_path(location.id))
   end
 
@@ -21,6 +20,6 @@ class LocationsController < ApplicationController
   private
 
   def create_params
-    params.require(:location).permit(:name, :capacity, :latitude, :longitude)
+    params.require(:location).permit(:name, :capacity, :latitude, :longitude, :location_image)
   end
 end

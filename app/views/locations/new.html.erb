@@ -23,6 +23,11 @@
     <%= f.number_field :capacity, placeholder: '5', required: true %> <br>
   </div>
 
+  <div class="form-group">
+    <%= f.label 'Cargar logo'%><br>
+    <%= f.file_field :location_image, required: true %> <br>
+  </div>
+
   <%= f.submit 'Agregar', class: "btn btn-success" %>
   <% end %>
 </div>
