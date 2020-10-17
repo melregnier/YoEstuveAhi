@@ -1,7 +1,28 @@
-<%= form_for(@location) do |f| %>
-    <%= f.text_field :name, placeholder: 'Nombre', required: true %> <br>
+<div class="container p-3 my-3 border">
+  <h1>Nueva Locación</h1>
+</div>
+<div class="container p-3 my-3 border">
+  <%= form_for(@location) do |f| %>
+  <div class="form-group">
+    <%= f.label 'Nombre'%><br>
+    <%= f.text_field :name, placeholder: 'Mi local uno', required: true %> <br>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Latitud'%><br>
     <%= f.text_field :latitude, placeholder: 'Latitud', required: true %> <br>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Longitud'%><br>
     <%= f.text_field :longitude, placeholder: 'Longitud', required: true %> <br>
-    <%= f.number_field :capacity, placeholder: 'Capacidad', required: true %> <br>
-    <%= f.submit %>
-<% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Capacidad'%><br>
+    <%= f.number_field :capacity, placeholder: '5', required: true %> <br>
+  </div>
+
+  <%= f.submit 'Agregar', class: "btn btn-success" %>
+  <% end %>
+</div>
