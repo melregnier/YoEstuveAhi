@@ -3,16 +3,40 @@
 </h1>
 
 <h4>
-  Usted está <%= @user_decorator.state_description %>. 
+  Usted está <%= @user_decorator.state_description %>.
 </h4><br>
 
 <% if @user_decorator.at_location? %>
 <h4>
   Usted está en <%= @location_decorator.name %>. Hay <%= @location_decorator.user_count %>
-  persona<%= 's' if @location_decorator.has_many_users? %> en la locación y la capacidad máxima es <%= @location_decorator.capacity %>.
+  persona<%= 's' if @location_decorator.has_many_users? %> en la locación y la capacidad máxima es
+  <%= @location_decorator.capacity %>.
 </h4>
 <% end %>
 
+<div class="row mx-md-n5">
+  <div class="col px-md-5">
+    <% if @user_decorator.can_check_in? %>
+    <%= button_to 'Escanear QR', '/qr', method: 'get', class: "btn btn-outline-dark btn-lg" %>
+    <% end %>
+  </div>
+  <div class="col px-md-5">
+    <% if @user_decorator.can_get_infected? %>
+    <%= button_to 'Registrar test positivo', '/tests/positive', method: 'get', class: "btn btn-outline-danger btn-lg" %>
+    <% end %>
+  </div>
+</div>
+<br>
+<div class="row mx-md-n5">
+  <div class="col px-md-5">
+    <%= button_to 'Registrar nueva locación', new_location_path, method: 'get',class: "btn btn-outline-dark btn-lg" %>
+  </div>
+  <div class="col px-md-5">
+    <%= button_to 'Registrar test negativo', '/tests/negative', method: 'get', class: "btn btn-outline-success btn-lg" %>
+  </div>
+</div>
+
+<!--
 <% if @user_decorator.can_check_in? %>
 <%= button_to 'Escanear QR', '/qr', method: 'get' %>
 <% end %>
@@ -22,4 +46,4 @@
 <% end %>
 
 <%= button_to 'Registrar nueva locación', new_location_path, method: 'get' %>
-<%= button_to 'Registrar test negativo', '/tests/negative', method: 'get' %>
+<%= button_to 'Registrar test negativo', '/tests/negative', method: 'get' %> -->
