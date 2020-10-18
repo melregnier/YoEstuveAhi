@@ -15,10 +15,10 @@ class QrDecoder
   private
 
   def transform_file_format
-    # crear nueva copia y borrar la anterior (esto va en el poro!!)
+    # crear nueva copia y borrar el tempfile anterior (esto va en el poro!!)
     image = MiniMagick::Image.open(@file_path)
     image.format('png')
-    image.write(@file_path + '.png')
-    @file_path = @file_path + '.png'
+    @file_path = image.tempfile.path
+    # we should do smth like image.destroy! to destroy the tempfile
   end
 end
