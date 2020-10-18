@@ -3,9 +3,15 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :logged_in?
   rescue_from Errors::InvalidUserOperation, with: :invalid_user_operation
+  rescue_from Errors::InvalidQR, with: :invalid_qr
   
   def invalid_user_operation
-    flash[:notice] = "Operación no permitida"
+    flash[:notice] = 'Operación no permitida'
+  end
+
+  def invalid_qr
+    flash[:notice] = 'No se pudo leer el QR. Por favor, intente con una imagen más clara.'
+    redirect_to('/home')
   end
   
   def current_user

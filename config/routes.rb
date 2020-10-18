@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   get 'home', to: 'home#index'
 
   get 'qr', to: 'user_locations#new'
+  resources :user_locations, only: :create
 end

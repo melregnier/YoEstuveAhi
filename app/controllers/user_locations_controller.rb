@@ -5,9 +5,13 @@ class UserLocationsController < ApplicationController
   end
 
   def create
-    qr_decoded = QrDecoder.new(create_params[:qr_image].tempfile.to_path).perform
-    user_location = UserLocation.new(user: current_user, location: qr_decoded)
-    return redirect_to(new_location_path) unless true
+    id_decoded = QrDecoder.new(create_params[:qr_image].tempfile.to_path).perform
+    ## falta validacion de que exista la locacion, de que no tenga otra user location, de que pueda check_inear, borrar imagen que creamos
+    user_location = UserLocation.new(user: current_user, location_id: id_decoded.to_i, check_in: Time.now)
+    unless user_location.save
+      flash[:notice] = 'Hubo un error en el sistema. Intente nuevamente más tarde.'
+      return redirect_to('/qr')
+    end
     redirect_to('/home')
   end
 
