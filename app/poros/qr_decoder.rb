@@ -4,17 +4,17 @@ class QrDecoder
   end
 
   def perform
-    transform_file_format unless @file_path.end_with?('.png')
+    convert_to_png unless @file_path.end_with?('.png')
+
     img = ChunkyPNG::Image.from_file(@file_path)
     res = Quirc.decode(img).first
-    # borrar imagen
     raise Errors::InvalidQR unless res.present?
     res.payload
   end
 
   private
 
-  def transform_file_format
+  def convert_to_png
     # crear nueva copia y borrar el tempfile anterior (esto va en el poro!!)
     image = MiniMagick::Image.open(@file_path)
     image.format('png')

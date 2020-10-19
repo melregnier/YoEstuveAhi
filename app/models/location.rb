@@ -5,4 +5,8 @@ class Location < ApplicationRecord
   has_one_attached :location_image
 
   validates_presence_of :name, :capacity, :latitude, :longitude, :user_id
+
+  def full?
+    user_locations.count >= capacity
+  end
 end

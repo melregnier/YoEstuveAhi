@@ -14,7 +14,12 @@ class NotifyLocationsOfInfection
   private
 
   def locations_to_notify
-    @infected_user.user_location_histories.where(check_in: contagious_period).map(&:location).uniq
+    @infected_user.user_location_histories
+                  .where(check_in: contagious_period)
+                  .map(&:location)
+                  .append(@infected_user.user_location&.location)
+                  .compact
+                  .uniq
   end
 
   def contagious_period

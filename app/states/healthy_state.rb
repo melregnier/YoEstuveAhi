@@ -7,17 +7,9 @@ class HealthyState < State
     true
   end
 
-  def check_in
-    raise NotImplementedError
-  end
-  
-  def check_out
-    raise NotImplementedError
-  end
-
   def put_at_risk
     @user.state = :at_risk
-    @user.save
+    @user.save!
   end
 
   def can_get_infected?
@@ -26,7 +18,7 @@ class HealthyState < State
 
   def got_infected
     @user.state = :infected
-    @user.save
+    @user.save!
   end
 
   def discharge

@@ -7,14 +7,6 @@ class InfectedState < State
     false
   end
 
-  def check_in
-    raise NotImplementedError
-  end
-
-  def check_out
-    raise NotImplementedError
-  end
-
   def put_at_risk
     raise InvalidUserOperation
   end
@@ -29,6 +21,6 @@ class InfectedState < State
 
   def discharge
     @user.state = :healthy
-    @user.save
+    @user.save!
   end
 end

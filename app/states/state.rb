@@ -11,14 +11,6 @@ class State
     raise NotImplementedError
   end
 
-  def check_in
-    raise NotImplementedError
-  end
-
-  def check_out
-    raise NotImplementedError
-  end
-
   def put_at_risk
     raise NotImplementedError
   end
