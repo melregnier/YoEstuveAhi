@@ -1,4 +1,4 @@
 module Errors
-  class LocationNotFound
+  class LocationNotFound < StandardError
   end
 end

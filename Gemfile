@@ -77,3 +77,5 @@ gem 'mini_magick'
 gem 'quirc'
 
 gem 'chunky_png'
+
+gem 'geocoder'

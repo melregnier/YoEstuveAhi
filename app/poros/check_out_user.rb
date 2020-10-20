@@ -1,7 +1,26 @@
 class CheckOutUser
-  ## verificar que pueda hacer check_out (que este en un local)
-  ## verificar que el id del qr sea el mismo que el id de donde esta
-  ## destroy el user location y crear el user location history
-  ## si se estaba enfermo, llamar a InformInContact....
+  def initialize(qr_tempfile, user)
+    @qr_tempfile = qr_tempfile
+    @user = user
+  end
   
+  def perform
+    raise Errors::InvalidUserOperation unless @user.can_check_out?
+
+    location_id = QrDecoder.new(@qr_tempfile.tempfile.to_path).perform.to_i
+    raise Errors::LocationNotFound unless Location.exists?(location_id)
+    
+    raise Errors::InvalidUserOperation unless location_id == @user.user_location.location.id
+
+    ActiveRecord::Base.transaction do
+      @user.user_location_histories.create!(
+        check_in: @user.user_location.check_in,
+        check_out: Time.now,
+        location_id: location_id
+      )
+      @user.user_location.destroy!
+    end
+
+    InformInContactUsersOfPossibleRisk.new(@user).perform if @user.infected?
+  end
 end

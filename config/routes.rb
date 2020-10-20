@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 
   get 'home', to: 'home#index'
 
-  get 'qr', to: 'user_locations#new'
+  get 'qr/checkin', to: 'user_locations#new_checkin'
+  get 'qr/checkout', to: 'user_locations#new_checkout'
+  delete 'user_location', to: 'user_locations#destroy'
+
   resources :user_locations, only: :create
 end

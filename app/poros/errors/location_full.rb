@@ -1,4 +1,4 @@
 module Errors
-  class LocationFull
+  class LocationFull < StandardError
   end
 end

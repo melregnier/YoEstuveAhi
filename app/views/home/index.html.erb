@@ -17,7 +17,10 @@
 <div class="row mx-md-n5">
   <div class="col px-md-5">
     <% if @user_decorator.can_check_in? %>
-    <%= button_to 'Escanear QR', '/qr', method: 'get', class: "btn btn-outline-dark btn-lg" %>
+    <%= button_to 'Entrar con QR', '/qr/checkin', method: 'get', class: "btn btn-outline-dark btn-lg" %>
+    <% end %>
+    <% if @user_decorator.can_check_out? %>
+    <%= button_to 'Salir con QR', '/qr/checkout', method: 'get', class: "btn btn-outline-dark btn-lg" %>
     <% end %>
   </div>
   <div class="col px-md-5">
@@ -35,15 +38,3 @@
     <%= button_to 'Registrar test negativo', '/tests/negative', method: 'get', class: "btn btn-outline-success btn-lg" %>
   </div>
 </div>
-
-<!--
-<% if @user_decorator.can_check_in? %>
-<%= button_to 'Escanear QR', '/qr', method: 'get' %>
-<% end %>
-
-<% if @user_decorator.can_get_infected? %>
-<%= button_to 'Registrar test positivo', '/tests/positive', method: 'get', class: 'btn btn-primary' %>
-<% end %>
-
-<%= button_to 'Registrar nueva locación', new_location_path, method: 'get' %>
-<%= button_to 'Registrar test negativo', '/tests/negative', method: 'get' %> -->

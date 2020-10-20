@@ -1,0 +1,10 @@
+<div class="container p-3 my-3 border">
+    <h1>Carga el código QR de la locación en donde estás</h1>
+</div>
+<div class="container p-3 my-3 border">
+    <%= form_for(@user_location, url: {controller: 'user_locations', action: 'destroy'}, method: :delete)  do |f| %>
+    <%= f.file_field :qr_image, required: true, class:"form-control" %>
+    <br>
+    <%= f.submit 'Salir de la locación', class: "btn btn-outline-dark"%>
+    <% end %>
+</div>

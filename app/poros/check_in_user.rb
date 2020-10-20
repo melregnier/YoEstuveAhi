@@ -10,7 +10,8 @@ class CheckInUser
     location_id = QrDecoder.new(@qr_tempfile.tempfile.to_path).perform.to_i
     raise Errors::LocationNotFound unless Location.exists?(location_id)
     
+    location = Location.find(location_id)
     raise Errors::LocationFull if location.full?
-    current_user.user_location.create!(location_id: location_id.to_i, check_in: Time.now)
+    @user.create_user_location!(location_id: location_id.to_i, check_in: Time.now)
   end
 end

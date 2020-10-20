@@ -1,7 +1,12 @@
 class UserLocationsController < ApplicationController
   # scan
-  def new
+  def new_checkin
     @user_location = UserLocation.new
+  end
+
+  def new_checkout
+    @user_location = current_user.user_location
+    raise Errors::InvalidUserOperation unless @user_location.present?
   end
 
   def create
