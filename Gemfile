@@ -79,3 +79,5 @@ gem 'quirc'
 gem 'chunky_png'
 
 gem 'geocoder'
+
+gem 'rqrcode'

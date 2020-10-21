@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :email, null: false, unique: true
       t.string :password_digest, null: false
       t.string :state, default: 'healthy'
+      t.boolean :admin, default: false
 
       t.timestamps
     end

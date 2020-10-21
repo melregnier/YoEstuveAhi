@@ -1,0 +1,16 @@
+<h1>
+  Hola administrador <%= @user_decorator.name %>!
+</h1>
+<script defer
+    src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.secrets.google_api_key%>&callback=initMap">
+</script>
+
+<script src='assets/admin_map.js'></script>
+
+<%= javascript_tag defer: 'defer' do -%>
+  alert('All is good')
+<% end -%>
+
+<div id="google-maps-api-map" style="width: 400px; height: 400px"></div>
+
+

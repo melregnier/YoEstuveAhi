@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2020_10_17_194258) do
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "state", default: "healthy"
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
