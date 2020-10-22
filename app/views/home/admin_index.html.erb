@@ -5,12 +5,14 @@
     src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.secrets.google_api_key%>&callback=initMap">
 </script>
 
+<%= javascript_tag do %>
+  window.locations = <%= raw @locations.to_json %>;
+<% end %>
+
 <script src='assets/admin_map.js'></script>
 
-<%= javascript_tag defer: 'defer' do -%>
-  alert('All is good')
-<% end -%>
+<div id="google-maps-api-map" style="width: 1110px; height: 500px" data-locations=<% Location.all.to_json %> ></div>
 
-<div id="google-maps-api-map" style="width: 400px; height: 400px"></div>
+
 
 

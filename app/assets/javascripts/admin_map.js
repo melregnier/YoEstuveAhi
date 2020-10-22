@@ -3,21 +3,19 @@ function initMap() {
         document.getElementById('google-maps-api-map'),
         {
             center: {
-                lat: 46.231226,
-                lng: 6.051737
+                lat: -34.53977,
+                lng: -58.493954
             },
-            zoom: 14
+            zoom: 9
         }
     );
 
-    const locations = [
-        {lat: 46.233226, lng: 6.055737},
-        {lat: 46.2278, lng: 6.0510},
-        {lat: 46.23336, lng: 6.0471}
-    ];
-    locations.forEach((location) => {
+    
+    console.log(window.locations);
+    window.locations.forEach((location) => {
+        console.log(location.latitude);
         new google.maps.Marker({
-            position: location,
+            position: {lat: parseFloat(location.latitude), lng: parseFloat(location.longitude)},
             map: map
         });
     });
