@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Yo Estuve Aqui</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <h1>Logiiiiin</h1>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
-  <body>
-    <%= yield %>
-  </body>
+<head>
+  <title>Yo Estuve Ahí</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/home">
+      <img src="/assets/logo.png" width="20" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+      YEA!
+    </a>
+    <form class="form-inline">
+      <a class="btn btn-outline-light" href="/login" role="button">
+        Ingresá
+      </a>
+      <div style="padding-left: 10px;">
+        <a class="btn btn-outline-light" href="/users/new" role="button">
+          Registrate!
+        </a>
+      </div>
+    </form>
+  </nav>
+
+</head>
+
+<body>
+  <%= yield %>
+</body>
+
+<% flash.each do |type, message| %>
+<div class="alert alert-danger" >
+<%= message %>
+</div>
+<% end %>
+
 </html>

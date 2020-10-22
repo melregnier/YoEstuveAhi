@@ -10,10 +10,38 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
-<!--<header class='clearfix'>-->
+
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <a class="navbar-brand" href="/home">
+    <img src="/assets/logo.png" width="20" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    YEA!
+  </a>
+  <div id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+      <li><%= link_to "Home", '/home', class: 'nav-link' %></li>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Mis locaciones", locations_path, method: 'get', class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Mis tests", '/tests', method: 'get', class: 'nav-link' %>
+      </li>
+    </ul>
+    </div>
+    <ul class="nav navbar-nav navbar-right" >
+      <li class="nav-item">
+        <%= link_to "Salir", '/logout', method: 'delete', class: 'nav-link' %>
+      </li>
+    </ul>
+    
+</nav>
+
+
+<!--
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/home">
-    <img src="/assets/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    <img src="/assets/logo.png" width="20" height="30" class="d-inline-block align-top" alt="" loading="lazy">
     YEA!
   </a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -35,28 +63,20 @@
     </ul>
   </div>
 </nav>
-  <!-- <div class="left-nav">
-    <ul>
-      <li><%= link_to "Home", '/home' %></li>
-    </ul>
-  </div>
-  <div class="right-nav">
-    <ul>
-      <li><%= link_to "Mis locaciones", locations_path, method: 'get' %></li>
-      <li><%= link_to "Mis tests", '/tests', method: 'get' %></li>
-      <li><%= link_to "Lugares visitados", '/lugares_visitados', method: 'get' %></li>
-      <li><%= link_to "Salir", '/logout', method: 'delete' %></li>
-    </ul>
-  </div> -->
-<!--</header>-->
+-->
 
-<body class='container'>
-  <%= yield %>
+
+<body>
+  <div class='container'>
+    <br>
+    <%= yield %>
+  </div>
 </body>
 
 <% flash.each do |type, message| %>
-<div class="alert alert-info" >
-<%= message %>
+<div class="alert alert-info">
+  <%= message %>
 </div>
 <% end %>
+
 </html>

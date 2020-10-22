@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:email])
-    return redirect_to('/login') unless @user && @user.authenticate(params[:password])
+    return credential_error unless @user && @user.authenticate(params[:password])
 
     session[:user_id] = @user.id
     redirect_to('/home')
@@ -17,5 +17,12 @@ class SessionsController < ApplicationController
     session.delete(:user_id)
     @current_user = nil
     redirect_to('/welcome')
+  end
+
+  private 
+
+  def credential_error
+    flash[:notice] = 'Error en las credenciales'
+    redirect_to('/login')
   end
 end
