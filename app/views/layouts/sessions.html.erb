@@ -14,13 +14,9 @@
       YEA!
     </a>
     <form class="form-inline">
-      <a class="btn btn-outline-light" href="/login" role="button">
-        Ingresá
-      </a>
+      <%= link_to "Ingresá", '/login', method: 'get', class: 'btn btn-outline-light' %>
       <div style="padding-left: 10px;">
-        <a class="btn btn-outline-light" href="/users/new" role="button">
-          Registrate!
-        </a>
+       <%= link_to "Registrate", new_user_path, method: 'get', class: 'btn btn-outline-light' %>
       </div>
     </form>
   </nav>

@@ -1,15 +1,20 @@
-<h1>Acá está tu locación <%= @location.name %> </h1>
-<h2>Actualmente hay <%= @location.user_locations.count %> personas en tu local. </h2>
-Nombre: <%= @location.name %> <br>
-Geoposición: <%= @location.latitude.to_s + ' ' + @location.longitude.to_s %> <br>
-Logo:
-<image src="<%= url_for(@location.location_image) %>" /> <br>
+<div class="container p-3 my-3 border">
+    <h1>
+        <image src="<%= url_for(@location.location_image) %>" width="150" height="150" />
+        <%= @location.name %>
+    </h1>
+    <h2>Actualmente hay <%= @location.user_locations.count %> personas en la locación. </h2>
+    <br>
+    <br>
 
-<div class='qr'>
-    QR: <%= @qr_code.html_safe %> <br>
-</div>
-<div class='map'>
-    <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=<%=Rails.application.secrets.google_api_key%>
-        &q=<%=@location.latitude.to_s + ' ' + @location.longitude.to_s%>" allowfullscreen>
-    </iframe>
+    <div class="row">
+        <div class="col">
+            <iframe width="400" height="250" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=<%=Rails.application.secrets.google_api_key%>
+                &q=<%=@location.latitude.to_s + ' ' + @location.longitude.to_s%>" allowfullscreen>
+            </iframe> <br>
+        </div>
+        <div class="col">
+            <%= @qr_code.html_safe %> <br>
+        </div>
+    </div>
 </div>

@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :authorized
+  layout 'sessions'
 
   def welcome
     redirect_to('/home') if logged_in?

@@ -15,4 +15,11 @@ class Location < ApplicationRecord
   def address
     [street, street_number, zip_code, country].join(' ')
   end
+
+  def as_json(*)
+    super.merge({
+      "address" => address,
+      "users_count" => user_locations.count
+    })
+  end
 end

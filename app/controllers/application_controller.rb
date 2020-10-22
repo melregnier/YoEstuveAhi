@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
   rescue_from Errors::LocationNotFound, with: :location_not_found
   rescue_from ActiveRecord::ActiveRecordError, with: :generic_error
   rescue_from Errors::LocationFull, with: :location_full
-  
+  layout :application_layout
+
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
@@ -16,12 +17,16 @@ class ApplicationController < ActionController::Base
     !current_user.nil?
   end
   
+  
+  private
+  
   def authorized
     redirect_to '/welcome' unless logged_in?
   end
-  
-  private
 
+  def application_layout
+    current_user&.admin? ? 'admin' : 'application' 
+  end
   ## Error Handling
   
   def invalid_user_operation
