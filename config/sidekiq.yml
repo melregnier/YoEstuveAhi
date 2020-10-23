@@ -1,0 +1,6 @@
+:queues:
+  - [default, 2]
+:schedule:
+  update_at_risk_users:
+    cron: '0 17 * * *'
+    class: 'UpdateAtRiskUsersWorker'

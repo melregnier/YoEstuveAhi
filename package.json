@@ -3,7 +3,9 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "5.2.1",
-    "@zxing/library": "^0.17.1"
+    "@zxing/library": "^0.17.1",
+    "chart.js": "^2.9.4",
+    "chartkick": "^3.2.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"

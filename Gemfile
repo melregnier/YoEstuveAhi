@@ -81,3 +81,8 @@ gem 'chunky_png'
 gem 'geocoder'
 
 gem 'rqrcode'
+
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+
+gem 'chartkick'

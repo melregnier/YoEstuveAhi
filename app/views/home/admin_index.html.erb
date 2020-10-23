@@ -13,6 +13,7 @@
 
 <div id="google-maps-api-map" style="width: 1110px; height: 500px" ></div>
 
-
+<%= pie_chart User.group(:state).count, library: {pieSliceText:
+'value-and-percentage'} %>
 
 
