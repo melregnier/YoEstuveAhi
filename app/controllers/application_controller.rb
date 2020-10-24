@@ -45,7 +45,6 @@ class ApplicationController < ActionController::Base
   end
 
   def generic_error(exception)
-    byebug
     flash[:notice] = 'Hubo un error en el sistema. Intente nuevamente más tarde.'
     redirect_to('/home')
   end
