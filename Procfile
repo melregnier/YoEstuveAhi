@@ -1,1 +1,1 @@
-web: bundle exec rails server RAILS_ENV=development
+web: bundle exec rails server -e development
