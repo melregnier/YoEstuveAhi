@@ -1,9 +1,11 @@
 <h1>Mis tests</h1>
-<table>
+<table class="table">
+    <thead class="thead-dark">
     <tr>
-        <th>Fecha</th>
-        <th>Resultado</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Resultado</th>
     </tr>
+    </thead>
     <% @decorated_tests.each do |test| %>
     <tr>
         <td><%= test.formatted_date %></td>

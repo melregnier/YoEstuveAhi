@@ -1,17 +1,18 @@
 <h1>Mis locaciones</h1>
-<table>
-    <tr>
-        <th>Nombre</th>
-        <th>Mapa</th>
-        <th>Logo</th>
-        <th>QR</th>
-    </tr>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Logo</th>
+            <th scope="col">Locación</th>
+        </tr>
+    </thead>
     <% @locations.each do |location| %>
     <tr>
-        <td><%= link_to location.name, location_path(location.id), method: 'get' %></td>
-        <td><%= location.latitude.to_s + ' ' +location.longitude.to_s %></td>
-        <td>ESTO ES UN LOGO</td>
-        <td>ESTO ES UN QR</td>
+        <td scope="row">
+            <image src="<%= url_for(location.location_image) %>" width="25" height="20" />
+        </td>
+        <td><%= link_to location.name, location_path(location.id), method: 'get', class: 'text-dark' %></td>
+
     </tr>
     <% end %>
 </table>

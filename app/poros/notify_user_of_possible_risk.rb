@@ -5,6 +5,6 @@ class NotifyUserOfPossibleRisk
 
   def perform
     UserMailer.with(user: @user).at_risk_email.deliver_now
-    # TO DO: COSAS DE NOTIFICACION
+    @user.user_notifications.create(message: 'Hemos registrado que ha tenido contacto con un usuario contagiado, su estado ha sido actualizado.')
   end
 end

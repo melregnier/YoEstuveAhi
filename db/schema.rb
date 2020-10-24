@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_17_194258) do
+ActiveRecord::Schema.define(version: 2020_10_24_185851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,13 @@ ActiveRecord::Schema.define(version: 2020_10_17_194258) do
     t.index ["user_id"], name: "index_user_logs_on_user_id"
   end
 
+  create_table "user_notifications", force: :cascade do |t|
+    t.string "message", null: false
+    t.bigint "user_id"
+    t.datetime "created_at"
+    t.index ["user_id"], name: "index_user_notifications_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "document_type", null: false
@@ -102,4 +109,5 @@ ActiveRecord::Schema.define(version: 2020_10_17_194258) do
   add_foreign_key "user_locations", "locations"
   add_foreign_key "user_locations", "users"
   add_foreign_key "user_logs", "users"
+  add_foreign_key "user_notifications", "users"
 end

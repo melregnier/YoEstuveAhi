@@ -4,9 +4,9 @@ class User < ApplicationRecord
   has_many :user_location_histories
   has_many :locations
   has_many :user_logs
+  has_many :user_notifications
   after_save :create_status_change_log
-
-
+  
   has_secure_password
 
   validates_presence_of :name, :document_type, :document_number, :password_digest, :email, :state
