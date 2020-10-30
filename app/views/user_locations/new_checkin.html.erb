@@ -8,9 +8,10 @@
     <%= f.submit 'Ingresar', class: "btn btn-outline-success"%>
     <% end %>
 </div>
+<% if current_user.at_risk? %>
 <div class="alert alert-warning" role="alert">
-    <% if current_user.at_risk? %>
     <h4> Usted se encuentra en riesgo. Intente ingresar lo menos posible a locaciones para evitar futuros contagios.
-     En caso de poseer un test negativo, puede ingresarlo <%= link_to "aquí", '/tests/negative', class: 'text-warning'%>. </h4>
-    <% end %>
+        En caso de poseer un test negativo, puede ingresarlo
+        <%= link_to "aquí", '/tests/negative', class: 'text-warning'%>. </h4>
 </div>
+<% end %>

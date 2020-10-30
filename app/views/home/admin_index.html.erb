@@ -2,18 +2,41 @@
   Hola administrador <%= @user_decorator.name %>!
 </h1>
 <script defer
-    src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.secrets.google_api_key%>&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.secrets.google_api_key%>&callback=initMap">
 </script>
 
 <%= javascript_tag do %>
-  window.locations = <%= raw @locations.to_json %>;
+window.locations = <%= raw @locations.to_json %>;
 <% end %>
 
 <script src='assets/admin_map.js'></script>
 
-<div id="google-maps-api-map" style="width: 1110px; height: 500px" ></div>
+<div id="google-maps-api-map" style="width: 1110px; height: 500px"></div>
 
-<%= pie_chart @users_by_state, library: {pieSliceText:
-'value-and-percentage'} %>
+<div class="container p-3 my-3 border">
+  <div class="row">
+    <div class="col">
+    <h1>Usuarios</h1><br>
+    <h3>Cantidad de usuarios: <%= @users_by_state.values.sum %> </h3> <br>
+    <h4> Sanos: <%= @users_by_state['healthy'] || 0 %></h4> 
+    <h4> En Riesgo: <%= @users_by_state['at_risk'] || 0 %></h4> 
+    <h4> Infectados: <%= @users_by_state['infected'] || 0 %></h4> 
+    </div>
+    <div class="col">
+      <%= pie_chart @users_by_state, library: {pieSliceText:
+  'value-and-percentage'} %>
+    </div>
+  </div>
+</div>
 
-
+<div class="container p-3 my-3 border">
+  <div class="row">
+    <div class="col">
+    <h1>Locaciones</h1><br>
+    <h3>Cantidad de locaciones: <%= @locations.count %></h3> <br>
+    </div>
+    <div class="col">
+      <%= column_chart @locations_by_capacity, xtitle: "Capacidad", ytitle: "Cantidad" %>
+    </div>
+  </div>
+</div>
