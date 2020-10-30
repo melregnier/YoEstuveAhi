@@ -10,12 +10,12 @@ class UserLocationsController < ApplicationController
   end
 
   def create
-    CheckInUser.new(qr_image, current_user).perform
+    Users::CheckInUser.new(qr_image, current_user).perform
     redirect_to('/home')
   end
 
   def destroy
-    CheckOutUser.new(qr_image, current_user).perform
+    Users::CheckOutUser.new(qr_image, current_user).perform
     redirect_to('/home')
   end
 

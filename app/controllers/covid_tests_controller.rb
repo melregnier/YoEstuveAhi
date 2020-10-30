@@ -14,14 +14,14 @@ class CovidTestsController < ApplicationController
   end
 
   def create_positive
-    success = GetUserInfected.new(current_user, date).perform
-    flash[:notice] = 'No se pudo registrar el test' unless success
+    Users::GetUserInfected.new(current_user, date).perform
+    flash[:notice] = 'Test registrado correctamente'
     redirect_to('/home')
   end
 
   def create_negative
-    success = DischargeUser.new(current_user, date).perform
-    flash[:notice] = 'No se pudo registrar el test' unless success
+    Users::DischargeUser.new(current_user, date).perform
+    flash[:notice] = 'Test registrado correctamente'
     redirect_to('/home')
   end
 

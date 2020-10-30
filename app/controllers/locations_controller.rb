@@ -8,6 +8,7 @@ class LocationsController < ApplicationController
   end
 
   def create
+    byebug
     location = Location.create!(create_params.merge(user_id: current_user.id))
     redirect_to(location_path(location.id))
   end

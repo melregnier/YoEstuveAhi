@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   rescue_from Errors::LocationNotFound, with: :location_not_found
   rescue_from ActiveRecord::ActiveRecordError, with: :generic_error
   rescue_from Errors::LocationFull, with: :location_full
+  rescue_from Errors::InvalidTest, with: :invalid_test
+  
   layout :application_layout
 
   def current_user
@@ -45,12 +47,18 @@ class ApplicationController < ActionController::Base
   end
 
   def generic_error(exception)
+    byebug
     flash[:notice] = 'Hubo un error en el sistema. Intente nuevamente más tarde.'
     redirect_to('/home')
   end
 
   def location_full
     flash[:notice] = 'El local se encuentra lleno actualmente. Intente nuevamente más tarde.'
+    redirect_to('/home')
+  end
+
+  def invalid_test
+    flash[:notice] = 'No se pudo registrar el test.'
     redirect_to('/home')
   end
 end

@@ -86,3 +86,5 @@ gem 'sidekiq'
 gem 'sidekiq-scheduler'
 
 gem 'chartkick'
+
+gem 'active_storage-postgresql'
