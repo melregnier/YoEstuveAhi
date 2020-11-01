@@ -34,7 +34,7 @@ module Users
     def in_contact_user_location_histories(user_location)
       # obtain histories of user overlapping for more than X MINUTES with the particular sick user location
       user_location_histories = overlapping_user_location_histories(user_location).select do | overlapping_user_location |
-        MINUTES_EXPOSED_TO_BE_AT_RISK <= contact_time(user_location, overlapping_user_location).minutes
+        MINUTES_EXPOSED_TO_BE_AT_RISK <= contact_time_with_user_location_history(user_location, overlapping_user_location).minutes
       end
 
       # we filter those who took a negative test after the contact and those already infected
@@ -46,7 +46,7 @@ module Users
     def in_contact_user_locations(user_location)
       # obtain user locations of user overlapping for more than X MINUTES with the particular sick user location
       user_locations = overlapping_user_locations(user_location).select do | overlapping_user_location |
-        MINUTES_EXPOSED_TO_BE_AT_RISK <= contact_time(user_location, overlapping_user_location).minutes
+        MINUTES_EXPOSED_TO_BE_AT_RISK <= contact_time_with_user_location(user_location, overlapping_user_location).minutes
       end
 
       # we filter those who took a negative test after the contact and those already infected
@@ -90,9 +90,14 @@ module Users
       '(check_out >= :check_in AND check_out <= :check_out)'
     end
 
-    def contact_time(user_location_fst, user_location_snd)
+    def contact_time_with_user_location_history(user_location_fst, user_location_snd)
       [user_location_fst&.check_out || Time.now, user_location_snd&.check_out || Time.now].min -
       [user_location_fst.check_in, user_location_snd.check_in].max
+    end
+
+    def contact_time_with_user_location(user_location_history, user_location)
+      user_location_history.check_out -
+      [user_location_history.check_in, user_location.check_in].max
     end
 
     def overlapping_containing_condition
