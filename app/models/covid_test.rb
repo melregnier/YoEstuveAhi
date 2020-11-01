@@ -13,6 +13,6 @@ class CovidTest < ApplicationRecord
   end
 
   def date_after_last_test
-    errors.add(:date, 'El test que intenta registrar tiene una fecha previa al ultimo test registrado.') unless user.covid_tests.last.date <= date
+    errors.add(:date, 'El test que intenta registrar tiene una fecha previa al ultimo test registrado.') unless user.covid_tests.empty? || user.covid_tests.last.date <= date
   end
 end

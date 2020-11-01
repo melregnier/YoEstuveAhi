@@ -11,7 +11,8 @@ module Users
       ActiveRecord::Base.transaction do
         @user.covid_tests.create!(date: @date, result: true)
         @user.got_infected
-      rescue => error
+      rescue => exception
+        logger.error(exception)
         raise Errors::InvalidTest
       end
 
