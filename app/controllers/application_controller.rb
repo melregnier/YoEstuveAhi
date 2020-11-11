@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :logged_in?
   rescue_from Errors::InvalidUserOperation, with: :invalid_user_operation
+  rescue_from Errors::EmailAlreadyTaken, with: :email_already_taken
   rescue_from Errors::InvalidQR, with: :invalid_qr
   rescue_from Errors::LocationNotFound, with: :location_not_found
   rescue_from ActiveRecord::ActiveRecordError, with: :generic_error
@@ -60,5 +61,10 @@ class ApplicationController < ActionController::Base
   def invalid_test
     flash[:notice] = 'No se pudo registrar el test.'
     redirect_to('/home')
+  end
+
+  def email_already_taken
+    flash[:notice] = 'Ese email ya se encuentra registrado.'
+    redirect_to(new_user_path)
   end
 end
