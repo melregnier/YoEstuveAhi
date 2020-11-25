@@ -26,5 +26,8 @@ Rails.application.routes.draw do
   get 'qr/checkout', to: 'user_locations#new_checkout'
   delete 'user_location', to: 'user_locations#destroy'
 
+  post 'checkin/:id', to: 'external_user_locations#check_in'
+  post 'checkout/:id', to: 'external_user_locations#check_out'
+
   resources :user_locations, only: :create
 end

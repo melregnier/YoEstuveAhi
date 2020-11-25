@@ -10,7 +10,7 @@ module Qr
       img = ChunkyPNG::Image.from_file(@file_path)
       res = Quirc.decode(img).first
       raise Errors::InvalidQR unless res.present?
-      res.payload
+      JSON.parse(res.payload)
     end
 
     private

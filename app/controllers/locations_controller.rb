@@ -15,6 +15,11 @@ class LocationsController < ApplicationController
   def show
     @location = Location.find(params.require(:id))
     @qr_code = RQRCode::QRCode.new(@location.id.to_s).as_svg
+    
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @location }
+    end
   end
 
   private

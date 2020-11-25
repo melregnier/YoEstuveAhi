@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authorized
+  before_action :authorized, unless: :json_format? 
   helper_method :current_user
   helper_method :logged_in?
   rescue_from Errors::InvalidUserOperation, with: :invalid_user_operation
@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::ActiveRecordError, with: :generic_error
   rescue_from Errors::LocationFull, with: :location_full
   rescue_from Errors::InvalidTest, with: :invalid_test
+  rescue_from Errors::ExternalApiException, with: :external_api_error
   
   layout :application_layout
 
@@ -25,6 +26,10 @@ class ApplicationController < ActionController::Base
   
   def authorized
     redirect_to '/welcome' unless logged_in?
+  end
+
+  def json_format?
+    request.format.json?
   end
 
   def application_layout
@@ -66,5 +71,10 @@ class ApplicationController < ActionController::Base
   def email_already_taken
     flash[:notice] = 'Ese email ya se encuentra registrado.'
     redirect_to(new_user_path)
+  end
+
+  def external_api_error(exception)
+    flash[:notice] = exception.message
+    redirect_to('/home')
   end
 end

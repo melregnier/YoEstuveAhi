@@ -9,7 +9,7 @@ class Location < ApplicationRecord
   validates_presence_of :name, :capacity, :latitude, :longitude, :user_id
 
   def full?
-    user_locations.count >= capacity
+    concurrence >= capacity
   end
 
   def address

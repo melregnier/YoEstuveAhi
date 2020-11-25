@@ -88,3 +88,7 @@ gem 'sidekiq-scheduler'
 gem 'chartkick'
 
 gem 'active_storage-postgresql'
+
+gem 'active_model_serializers'
+
+gem 'httparty'
