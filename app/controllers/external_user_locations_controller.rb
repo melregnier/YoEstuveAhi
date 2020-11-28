@@ -6,6 +6,7 @@ class ExternalUserLocationsController < ApplicationController
     return render status: :not_found, json: {message: 'Locación llena'} if @location.full?
 
     @location.update(concurrence: @location.concurrence + 1)
+    render status: :ok, json: @location
   end
 
   def check_out
@@ -13,5 +14,6 @@ class ExternalUserLocationsController < ApplicationController
     return render status: :not_found, json: {message: 'Locación inexistente'} if @location.nil?
 
     @location.update(concurrence: @location.concurrence - 1)
+    head :ok
   end
 end

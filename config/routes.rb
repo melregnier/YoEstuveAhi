@@ -29,5 +29,7 @@ Rails.application.routes.draw do
   post 'checkin/:id', to: 'external_user_locations#check_in'
   post 'checkout/:id', to: 'external_user_locations#check_out'
 
+  post 'contagion/new', to: 'external_contagion#create'
+
   resources :user_locations, only: :create
 end

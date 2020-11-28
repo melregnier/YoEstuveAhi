@@ -1,8 +1,8 @@
 class AddConcurrenceToLocation < ActiveRecord::Migration[5.2]
   def up
-    add_column :locations, :concurrence, :integer
+    add_column :locations, :concurrence, :integer, null: false, default: 0
     add_column :locations, :external_id, :integer
-    add_column :locations, :server_id, :integer, null: false, default: 0
+    add_column :locations, :server_id, :integer, default: 0
     change_column_null :locations, :street, true
     change_column_null :locations, :country, true
     change_column_null :locations, :street_number, true
@@ -12,8 +12,6 @@ class AddConcurrenceToLocation < ActiveRecord::Migration[5.2]
       location.update_attributes!(:external_id => location.id)
       location.update_attributes!(:concurrence => location.user_locations.count)
     end
-
-    change_column_null :locations, :external_id, false
   end
   
   def down

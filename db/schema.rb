@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(version: 2020_11_24_193003) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "concurrence"
-    t.integer "external_id", null: false
-    t.integer "server_id", default: 0, null: false
+    t.integer "concurrence", default: 0, null: false
+    t.integer "external_id"
+    t.integer "server_id", default: 0
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 

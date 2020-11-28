@@ -1,7 +1,6 @@
 module ExternalServices
 	class ExternalApiService
-		BASE_URL = { 1: 'react.url/caquita', 2: 'link.de.los.otros.com.asp.net' }
-
+		BASE_URL = { 1 => 'react.url/caquita', 2 => 'link.de.los.otros.com.asp.net' }
 
 		def initialize(server_id)
 			@server_id = server_id
@@ -24,20 +23,21 @@ module ExternalServices
 			response.body
 		end
 
-		#post check_out
+		# post check_out
 		def check_out(location_id)
 			response = HTTParty.post( @base_url + 'checkout/' + location_id)
 			raise Errors::ExternalApiException.new(response.body['message']) unless response.code == 200
 
 			response.body
 		end
-		
-		#TO DO
-		#post contagion/new
-		#def check_out(list_of)
-		#	response = HTTParty.post( @base_url + 'contagion/new')
-			
-		#end
+
+		# post contagion/new
+		def notify_contagion(stays_body)
+      response = HTTParty.post( @base_url + 'contagion/new', body: stays_body,  headers: { 'Content-Type' => 'application/json' } )
+      raise Errors::ExternalApiException.new(response.body['message']) unless response.code == 200
+
+      response.body
+		end
 
 	end	
 end
