@@ -10,7 +10,7 @@ module Users
       user_location_histories = @user.user_location_histories.where(check_in: contagious_period)
       return if user_location_histories.empty?
 
-      #ExternalServices::InformExternalServicesOfContagion.new(user_location_histories).perform
+      ExternalServices::InformExternalServicesOfContagion.new(user_location_histories).perform
 
       Users::InformInternalUsersOfPossibleRisk.new(user_location_histories).perform
     end

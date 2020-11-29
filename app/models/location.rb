@@ -1,7 +1,7 @@
 class Location < ApplicationRecord
   RUBY_SERVER_ID = Rails.application.secrets.ruby_server_id
 
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :user_locations
   has_many :user_location_histories
   has_one_attached :location_image
@@ -9,7 +9,7 @@ class Location < ApplicationRecord
   after_initialize :geocode
   after_save :fill_external_fields
 
-  validates_presence_of :name, :capacity, :latitude, :longitude, :user_id, :concurrence
+  validates_presence_of :name, :capacity, :latitude, :longitude, :concurrence
 
   def full?
     concurrence >= capacity

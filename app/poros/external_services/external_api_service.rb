@@ -1,6 +1,9 @@
 module ExternalServices
 	class ExternalApiService
-		BASE_URL = { 1 => 'react.url/caquita', 2 => 'link.de.los.otros.com.asp.net' }
+		BASE_URL = {
+			Rails.application.secrets.react_server_id => Rails.application.secrets.react_server_url,
+			Rails.application.secrets.asp_server_id => Rails.application.secrets.asp_server_url
+		}
 
 		def initialize(server_id)
 			@server_id = server_id

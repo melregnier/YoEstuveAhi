@@ -8,7 +8,7 @@ module Notifications
 
     def perform
       locations_to_notify.each do | location |
-        UserMailer.with(user: location.user).location_at_risk_email.deliver_now
+        UserMailer.with(user: location.user).location_at_risk_email.deliver_now if location.user_id.present?
       end
     end
 
