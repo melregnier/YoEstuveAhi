@@ -12,7 +12,7 @@ module ExternalServices
 
 		# get location data
 		def location_data(location_id)
-			response = HTTParty.get( @base_url + '/location/' +  location_id)
+			response = HTTParty.get( @base_url + '/location/' +  location_id, headers: { 'Accept' => 'application/json' })
 			raise Errors::ExternalApiException.new(response.body['message']) unless response.code == 200
 
 			response.body
@@ -20,7 +20,10 @@ module ExternalServices
 
 		# post check_in
 		def check_in(location_id)
-			response = HTTParty.post( @base_url + 'checkin/' + location_id)
+			response = HTTParty.post(
+        @base_url + '/checkin/' + location_id,
+        headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      )
 			raise Errors::ExternalApiException.new(response.body['message']) unless response.code == 200
 
 			response.body
@@ -28,18 +31,25 @@ module ExternalServices
 
 		# post check_out
 		def check_out(location_id)
-			response = HTTParty.post( @base_url + 'checkout/' + location_id)
+			response = HTTParty.post(
+        @base_url + '/checkout/' + location_id,
+        headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      )
 			raise Errors::ExternalApiException.new(response.body['message']) unless response.code == 200
 
 			response.body
 		end
 
 		# post contagion/new
-		def notify_contagion(stays_body)
-      response = HTTParty.post( @base_url + 'contagion/new', body: stays_body,  headers: { 'Content-Type' => 'application/json' } )
+    def notify_contagion(stays_body)
+      response = HTTParty.post(
+        @base_url + '/contagion/new',
+        body: stays_body,
+        headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      )
       raise Errors::ExternalApiException.new(response.body['message']) unless response.code == 200
 
-      response.body
+			response.body
 		end
 
 	end	
