@@ -12,32 +12,35 @@ module ExternalServices
 
 		# get location data
 		def location_data(location_id)
-			response = HTTParty.get( @base_url + '/location/' +  location_id, headers: { 'Accept' => 'application/json' })
-			raise Errors::ExternalApiException.new(response.body['message']) unless response.code == 200
+			response = HTTParty.get( @base_url + '/location/' +  location_id.to_s, headers: { 'Accept' => 'application/json' })
+			body = JSON.parse(response.body)
+			raise Errors::ExternalApiException.new(body['message']) unless response.code == 200
 
-			response.body
+			body
 		end
 
 		# post check_in
 		def check_in(location_id)
 			response = HTTParty.post(
-        @base_url + '/checkin/' + location_id,
+        @base_url + '/checkin/' + location_id.to_s,
         headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      )
-			raise Errors::ExternalApiException.new(response.body['message']) unless response.code == 200
+			)
+			body = JSON.parse(response.body)
+			raise Errors::ExternalApiException.new(body['message']) unless response.code == 200
 
-			response.body
+			body
 		end
 
 		# post check_out
 		def check_out(location_id)
 			response = HTTParty.post(
-        @base_url + '/checkout/' + location_id,
+        @base_url + '/checkout/' + location_id.to_s,
         headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      )
-			raise Errors::ExternalApiException.new(response.body['message']) unless response.code == 200
+			)
+			body = JSON.parse(response.body)
+			raise Errors::ExternalApiException.new(body['message']) unless response.code == 200
 
-			response.body
+			body
 		end
 
 		# post contagion/new
@@ -46,11 +49,11 @@ module ExternalServices
         @base_url + '/contagion/new',
         body: stays_body,
         headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      )
-      raise Errors::ExternalApiException.new(response.body['message']) unless response.code == 200
+			)
+			body = JSON.parse(response.body)
+      raise Errors::ExternalApiException.new(body['message']) unless response.code == 200
 
-			response.body
+			body
 		end
-
 	end	
 end
