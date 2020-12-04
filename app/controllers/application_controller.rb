@@ -3,14 +3,14 @@ class ApplicationController < ActionController::Base
   before_action :authorized, unless: :json_format? 
   helper_method :current_user
   helper_method :logged_in?
-  rescue_from Errors::InvalidUserOperation, with: :invalid_user_operation
+  rescue_from Errors::InvalidUserOperation, with: lambda { json_format? ? invalid_user_operation_json : invalid_user_operation }
   rescue_from Errors::EmailAlreadyTaken, with: :email_already_taken
   rescue_from Errors::InvalidQR, with: :invalid_qr
-  rescue_from Errors::LocationNotFound, with: :location_not_found
-  rescue_from ActiveRecord::ActiveRecordError, with: :generic_error
-  rescue_from Errors::LocationFull, with: :location_full
+  rescue_from Errors::LocationNotFound, with: lambda { json_format? ? location_not_found_json : location_not_found } 
+  rescue_from ActiveRecord::ActiveRecordError, with: lambda { json_format? ? generic_error_json : generic_error }
+  rescue_from Errors::LocationFull, with: lambda { json_format? ? location_full_json : location_full }
   rescue_from Errors::InvalidTest, with: :invalid_test
-  rescue_from Errors::ExternalApiException, with: :external_api_error
+  rescue_from Errors::ExternalApiException, with: lambda {|exc| json_format? ? external_api_error_json : external_api_error(exc) }
   
   layout :application_layout
 
@@ -43,6 +43,10 @@ class ApplicationController < ActionController::Base
     redirect_to('/home')
   end
 
+  def invalid_user_operation_json
+    render status: :unprocessable_entity, json: { message: 'Operación no permitida.' }
+  end
+
   def invalid_qr
     flash[:notice] = 'No se pudo leer el QR. Por favor, intente con una imagen más clara.'
     redirect_to('/home')
@@ -53,15 +57,27 @@ class ApplicationController < ActionController::Base
     redirect_to('/home')
   end
 
+  def location_not_found_json
+    render status: :not_found, json: { message: 'Locación no encontrada.' }
+  end
+
   def generic_error(exception)
     logger.error(exception)
     flash[:notice] = 'Hubo un error en el sistema. Intente nuevamente más tarde.'
     redirect_to('/home')
   end
 
+  def generic_error_json
+    render status: :unprocessable_entity, json: { message: 'Algo salió mal.' }
+  end
+
   def location_full
     flash[:notice] = 'El local se encuentra lleno actualmente. Intente nuevamente más tarde.'
     redirect_to('/home')
+  end
+
+  def location_full_json
+    render status: :unprocessable_entity, json: { message: 'La locación está llena.' }
   end
 
   def invalid_test
@@ -77,5 +93,9 @@ class ApplicationController < ActionController::Base
   def external_api_error(exception)
     flash[:notice] = exception.message
     redirect_to('/home')
+  end
+
+  def external_api_error_json
+    render status: :unprocessable_entity, json: { message: 'Error externo.' }
   end
 end

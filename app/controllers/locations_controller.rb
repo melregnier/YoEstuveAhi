@@ -15,7 +15,8 @@ class LocationsController < ApplicationController
   end
 
   def show
-    @location = Location.find(params.require(:id))
+    @location = Location.find_by(id: params.require(:id))
+    raise Errors::LocationNotFound if @location.nil?
     @qr_code = RQRCode::QRCode.new({ location_id: @location.id, server_id: RUBY_SERVER_ID }.to_json).as_svg
     
     respond_to do |format|
