@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   post 'contagion/new', to: 'external_contagion#create'
 
   resources :user_locations, only: :create
+
+  get 'location/:id', to: 'locations#show'
 end

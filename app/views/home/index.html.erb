@@ -8,7 +8,7 @@
 
 <% if @user_decorator.at_location? %>
 <h4>
-  Usted está en <%= @location_decorator.name %>. Hay <%= @location_decorator.user_count %>
+  Usted está en <%= @location_decorator.name %>. Hay <%= @location_decorator.concurrence %>
   persona<%= 's' if @location_decorator.has_many_users? %> en la locación y la capacidad máxima es
   <%= @location_decorator.capacity %>.
 </h4>

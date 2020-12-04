@@ -22,7 +22,7 @@ class Location < ApplicationRecord
   def as_json(*)
     super.merge({
       "address" => address,
-      "users_count" => user_locations.count
+      "users_count" => concurrence
     })
   end
 
