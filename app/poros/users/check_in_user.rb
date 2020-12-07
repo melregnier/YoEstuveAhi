@@ -16,7 +16,7 @@ module Users
       @server_id = location_data['server_id'].to_i
 
       server_id == RUBY_SERVER_ID ? internal_check_in : external_check_in
-    end 
+    end
     
     private
     
@@ -27,7 +27,7 @@ module Users
       raise Errors::LocationFull if location.full?
 
       ActiveRecord::Base.transaction do
-        @user.create_user_location!(location_id: location_id, check_in: Time.now)
+        @user.create_user_location!(location_id: location_id, check_in: Time.zone.now)
         location.update!(concurrence: location.concurrence + 1)
       end
     end
@@ -48,7 +48,7 @@ module Users
       # let the server know of check in and create user_location
       external_service.check_in(location_id)
       
-      @user.create_user_location!(location_id: location.id, check_in: Time.now)
+      @user.create_user_location!(location_id: location.id, check_in: Time.zone.now)
     end
   end
 end

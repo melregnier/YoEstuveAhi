@@ -9,7 +9,7 @@ class AtRiskState < State
 
   def put_at_risk
     # create a new log to track the last moment they were put at risk
-    @user.user_logs.create(created_at: Time.now, to_state: :at_risk.to_s)
+    @user.user_logs.create(created_at: Time.zone.now, to_state: :at_risk.to_s)
   end
 
   def can_get_infected?
