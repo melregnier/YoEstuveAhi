@@ -37,7 +37,7 @@ module ExternalServices
         @base_url + '/checkout/' + location_id.to_s,
         headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 			)
-			body = JSON.parse(response.body)
+			body = response.body.present? ? JSON.parse(response.body) : nil
 			raise Errors::ExternalApiException.new(body['message']) unless response.code == 200
 
 			body
@@ -50,7 +50,7 @@ module ExternalServices
         body: stays_body,
         headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 			)
-			body = JSON.parse(response.body)
+			body = response.body.present? ? JSON.parse(response.body) : nil
       raise Errors::ExternalApiException.new(body['message']) unless response.code == 200
 
 			body
