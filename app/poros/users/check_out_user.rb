@@ -17,7 +17,7 @@ module Users
       
       raise Errors::LocationNotFound unless Location.exists?(external_id: location_id)
       
-      raise Errors::InvalidUserOperation unless location_id == @user.user_location.location.id
+      raise Errors::InvalidUserOperation unless location_id == @user.user_location.location.external_id
       
       server_id == RUBY_SERVER_ID ? internal_check_out : external_check_out
       Users::InformInContactUsersOfPossibleRisk.new(@user).perform if @user.infected?
@@ -45,7 +45,7 @@ module Users
         @user.user_location_histories.create!(
           check_in: @user.user_location.check_in,
           check_out: Time.now,
-          location_id: location_id
+          location_id: @user.user_location.location.id
         )
         @user.user_location.destroy!
       end

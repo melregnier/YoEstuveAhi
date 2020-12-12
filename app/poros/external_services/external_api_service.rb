@@ -22,7 +22,7 @@ module ExternalServices
 		# post check_in
 		def check_in(location_id)
 			response = HTTParty.post(
-        @base_url + '/checkin/' + location_id.to_s,
+        @base_url + '/checkin/' + location_id.to_s + '/',
         headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 			)
 			body = JSON.parse(response.body)
@@ -34,7 +34,7 @@ module ExternalServices
 		# post check_out
 		def check_out(location_id)
 			response = HTTParty.post(
-        @base_url + '/checkout/' + location_id.to_s,
+        @base_url + '/checkout/' + location_id.to_s + '/',
         headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 			)
 			body = response.body.present? ? JSON.parse(response.body) : nil
@@ -46,7 +46,7 @@ module ExternalServices
 		# post contagion/new
     def notify_contagion(stays_body)
       response = HTTParty.post(
-        @base_url + '/contagion/new',
+        @base_url + '/contagion/new/',
         body: stays_body,
         headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 			)

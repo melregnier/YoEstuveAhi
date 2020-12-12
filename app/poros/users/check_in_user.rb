@@ -38,8 +38,10 @@ module Users
       external_location_data = external_service.location_data(location_id)
       # create if necessary external location
       location = Location.find_or_create_by(external_id: location_id, server_id: server_id) do | location |
+        location.name = external_location_data['name']
         location.latitude = external_location_data['latitude']
         location.longitude = external_location_data['longitude']
+        location.concurrence = external_location_data['concurrence']
         location.capacity = external_location_data['capacity']
       end
       

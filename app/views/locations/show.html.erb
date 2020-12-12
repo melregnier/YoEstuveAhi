@@ -1,6 +1,8 @@
 <div class="container p-3 my-3 border">
     <h1>
-        <image src="<%= url_for(@location.location_image) %>" width="150" height="150" />
+        <% if @location.location_image.attached? %>
+            <image src="<%= url_for(@location.location_image) %>" width="150" height="150" />
+        <% end %>
         <%= @location.name %>
     </h1>
     <h2>Actualmente hay <%= @location.concurrence %> personas en la locación. </h2>
