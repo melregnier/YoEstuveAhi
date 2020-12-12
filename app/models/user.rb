@@ -52,6 +52,6 @@ class User < ApplicationRecord
   end
 
   def create_status_change_log
-    user_logs.create(created_at: Time.zone.now, to_state: state) if saved_change_to_state?
+    user_logs.create(created_at: Time.now, to_state: state) if saved_change_to_state?
   end
 end

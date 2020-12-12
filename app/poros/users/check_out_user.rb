@@ -29,7 +29,7 @@ module Users
       ActiveRecord::Base.transaction do
         @user.user_location_histories.create!(
           check_in: @user.user_location.check_in,
-          check_out: Time.zone.now,
+          check_out: Time.now,
           location_id: location_id
         )
         @user.user_location.location.update!(concurrence: @user.user_location.location.concurrence - 1)
@@ -44,7 +44,7 @@ module Users
       ActiveRecord::Base.transaction do
         @user.user_location_histories.create!(
           check_in: @user.user_location.check_in,
-          check_out: Time.zone.now,
+          check_out: Time.now,
           location_id: location_id
         )
         @user.user_location.destroy!

@@ -76,7 +76,7 @@ module Users
     end
 
     def contact_time_with_user_location_history(user_location_fst, user_location_snd)
-      [user_location_fst&.[](:check_out) || Time.zone.now, user_location_snd&.[](:check_out) || Time.zone.now].min -
+      [user_location_fst&.[](:check_out) || Time.now, user_location_snd&.[](:check_out) || Time.now].min -
       [user_location_fst[:check_in], user_location_snd[:check_in]].max
     end
 

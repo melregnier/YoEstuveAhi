@@ -27,7 +27,7 @@ module Users
       raise Errors::LocationFull if location.full?
 
       ActiveRecord::Base.transaction do
-        @user.create_user_location!(location_id: location_id, check_in: Time.zone.now)
+        @user.create_user_location!(location_id: location_id, check_in: Time.now)
         location.update!(concurrence: location.concurrence + 1)
       end
     end
@@ -48,7 +48,7 @@ module Users
       # let the server know of check in and create user_location
       external_service.check_in(location_id)
       
-      @user.create_user_location!(location_id: location.id, check_in: Time.zone.now)
+      @user.create_user_location!(location_id: location.id, check_in: Time.now)
     end
   end
 end

@@ -25,8 +25,8 @@ module Mappers
 
       {
         location_id: location.id,
-        check_in: @object[:begin].to_time,
-        check_out: @object[:end].to_time
+        check_in: Time.at(@object[:begin]),
+        check_out: Time.at(@object[:end])
       }
     end
 
@@ -34,8 +34,8 @@ module Mappers
       { 
         location_id: @object.location.external_id, 
         server_id: @object.location.server_id, 
-        begin: @object.check_in, 
-        end: @object.check_out
+        begin: @object.check_in.to_i, 
+        end: @object.check_out.to_i
       }
     end
   end
