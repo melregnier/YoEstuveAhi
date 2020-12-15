@@ -29,4 +29,11 @@ class Location < ApplicationRecord
   def fill_external_fields
     update(server_id: RUBY_SERVER_ID, external_id: id) if external_id.nil?
   end
+
+  def update_concurrence
+    if server_id != RUBY_SERVER_ID
+      location_data = ExternalServices::ExternalApiService.new(server_id).location_data(external_id)
+      update(concurrence: location_data['concurrence'])
+    end
+  end
 end
